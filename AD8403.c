@@ -21,7 +21,6 @@
 // Einfuegen der eigenen Include Dateien
 //----------------------------------------------------------------------
 #include "AD8403.h"
-#include "BatteriemanagementSystem.h"
 //----------------------------------------------------------------------
 
 // Initialisiere AD8403
@@ -57,7 +56,7 @@ void setPoti (uint8_t addresse, uint8_t Data)
 	AD8403_CS_ENABLE();
 
 	// Command fuer AD8403 senden
-	HAL_SPI_Transmit(&hspi1, tmp, 2, HAL_MAX_DELAY);
+	HAL_SPI_Transmit(&AD8403_SPI_PORT, tmp, 2, HAL_MAX_DELAY);
 
 	// Deaktiviere Chip Select
 	AD8403_CS_DISABLE();
