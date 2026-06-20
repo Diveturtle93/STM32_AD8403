@@ -13,51 +13,6 @@
 // RS Pin Pulse				= positiv Pulse, Alle Potis werden auf Wiper Center gesetzt
 // RS Pin					= High, Alle anderen Funktionen gegeben
 // CS, RS und Shutdown		= High, No Operation
-
-// Bruecke an A Kurzgeschlossen, Bruecke an B offen
-// Digitaler Wert			Widerstand am Poti	, Errechneter Widerstand
-// Poti = 0					=> 347 Ohm
-// Poti = 35				=> 309 Ohm			, 312
-// Poti = 56				=> 298 Ohm			, 291
-// Poti = 98				=> 259 Ohm			, 249
-// Poti = 128				=> 228 Ohm			, 219
-// Poti = 156				=> 196 Ohm			, 191
-// Poti = 197				=> 148 Ohm			, 150
-// Poti = 213				=> 128 Ohm			, 134
-// Poti = 237				=> 95 Ohm			, 110
-// Poti = 255				=> 65 Ohm			, 92
-// RS Pin Pulse				=> 128 Ohm			, 128
-// Shutdown Pin Low			=>  Ohm			, 128
-
-// Bruecke an B Kurzgeschlossen, Bruecke an A offen
-// Digitaler Wert			Widerstand am Poti	, Errechneter Widerstand
-// Poti = 0					=> 65 Ohm			, 92
-// Poti = 35				=> 95 Ohm			, 110
-// Poti = 56				=> 128 Ohm			, 134
-// Poti = 98				=> 148 Ohm			, 150
-// Poti = 128				=> 196 Ohm			, 191
-// Poti = 156				=> 228 Ohm			, 219
-// Poti = 197				=> 259 Ohm			, 249
-// Poti = 213				=> 298 Ohm			, 291
-// Poti = 237				=> 309 Ohm			, 312
-// Poti = 255				=> 347 Ohm
-// RS Pin Pulse				=> 128 Ohm			, 128
-// Shutdown Pin Low			=>  Ohm			, 128
-
-// Bruecke an B Kurzgeschlossen, Bruecke an A  Kurzgeschlossen
-// Digitaler Wert			Widerstand am Poti	, Errechneter Widerstand
-// Poti = 0					=> 65 Ohm			, 92
-// Poti = 35				=> 95 Ohm			, 110
-// Poti = 56				=> 128 Ohm			, 134
-// Poti = 98				=> 148 Ohm			, 150
-// Poti = 128				=> 196 Ohm			, 191
-// Poti = 156				=> 228 Ohm			, 219
-// Poti = 197				=> 259 Ohm			, 249
-// Poti = 213				=> 298 Ohm			, 291
-// Poti = 237				=> 309 Ohm			, 312
-// Poti = 255				=> 65 Ohm			, 92
-// RS Pin Pulse				=> 128 Ohm			, 128
-// Shutdown Pin Low			=> 65 Ohm			, 92
 //----------------------------------------------------------------------
 
 // Sicherheitssymbol
@@ -100,6 +55,45 @@
 #define AD8403_MUX1						0b01								// Poti 2
 #define AD8403_MUX2						0b10								// Poti 3
 #define AD8403_MUX3						0b11								// Poti 4
+//----------------------------------------------------------------------
+
+// Neudefinieren des SPI wenn notwendig
+//----------------------------------------------------------------------
+#ifndef AD8403_SPI_PORT
+	#define AD8403_SPI_PORT hspi1
+#endif
+
+extern SPI_HandleTypeDef AD8403_SPI_PORT;
+//----------------------------------------------------------------------
+
+// Pins definieren
+//----------------------------------------------------------------------
+// Chip Select Pin
+//----------------------------------------------------------------------
+#ifdef AD8403_CS_GPIO_Port
+	#define AD8403_CS_ENABLE() (HAL_GPIO_WritePin(AD8403_CS_GPIO_Port, AD8403_CS_Pin, GPIO_PIN_RESET))			// Chip-Select Leitung enable
+	#define AD8403_CS_DISABLE() (HAL_GPIO_WritePin(AD8403_CS_GPIO_Port, AD8403_CS_Pin, GPIO_PIN_SET))			// Chip-Select Leitung disable
+#else
+	#warning "Kein Chip Select Pin fuer AD8403 definiert"
+#endif
+//----------------------------------------------------------------------
+// RS Pin
+//----------------------------------------------------------------------
+#ifdef AD8403_RS_GPIO_Port
+	#define AD8403_RS_ENABLE() (HAL_GPIO_WritePin(AD8403_RS_GPIO_Port, AD8403_RS_Pin, GPIO_PIN_SET))			// Reset-Select Leitung enable
+	#define AD8403_RS_DISABLE() (HAL_GPIO_WritePin(AD8403_RS_GPIO_Port, AD8403_RS_Pin, GPIO_PIN_RESET))			// Reset-Select Leitung disable
+#else
+	#warning "Kein RS Pin fuer AD8403 definiert"
+#endif
+//----------------------------------------------------------------------
+// Shutdown Pin
+//----------------------------------------------------------------------
+#ifdef AD8403_SHDN_GPIO_Port
+	#define AD8403_SHDN_ENABLE() (HAL_GPIO_WritePin(AD8403_SHDN_GPIO_Port, AD8403_SHDN_Pin, GPIO_PIN_SET))		// Shutdown Leitung enable
+	#define AD8403_SHDN_DISABLE() (HAL_GPIO_WritePin(AD8403_SHDN_GPIO_Port, AD8403_SHDN_Pin, GPIO_PIN_RESET))	// Shutdown Leitung disable
+#else
+	#warning "Kein Shutdown Pin fuer AD8403 definiert"
+#endif
 //----------------------------------------------------------------------
 
 // Funktionen definieren
