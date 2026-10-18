@@ -12,7 +12,7 @@ Erste veröffentlichte Version.
 
 ### Hinzugefügt
 
-- Treiber `AD8403.c` / `AD8403.h` für das digitale Quad-Potentiometer AD8403 mit den
+- Treiber `ad8403.c` / `ad8403.h` für das digitale Quad-Potentiometer AD8403 mit den
   Funktionen `initAD8403`, `setPoti`, `setAllPoti`, `PotiOff`, `AllPotiOff`,
   `AllPotiOn` und `AllPotiMidscale`.
 - Adressmakros `AD8403_MUX0` bis `AD8403_MUX3` für die vier Potentiometer.
@@ -26,7 +26,9 @@ Erste veröffentlichte Version.
 
 ### Geändert
 
-- Die gemessenen Widerstandstabellen wurden aus `AD8403.h` in die README verschoben.
+- Quelldateien in Kleinschreibung umbenannt (`AD8403.c` / `AD8403.h` → `ad8403.c` /
+  `ad8403.h`), passend zum Include und für Dateisysteme mit Groß-/Kleinschreibung.
+- Die gemessenen Widerstandstabellen wurden aus `ad8403.h` in die README verschoben.
 - Dateiköpfe vereinheitlicht: Versionszeile entfernt (Version steht in den Makros),
   Feld `Quelle` ergänzt; Kommentare und Einrückung vereinheitlicht.
 

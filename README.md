@@ -26,8 +26,8 @@ Sind CS, RS und SHDN High, findet keine Operation statt.
 
 | Datei          | Beschreibung                                                     |
 |----------------|------------------------------------------------------------------|
-| `AD8403.h`     | Version, Adressdefinitionen, SPI- und Pin-Konfiguration, API      |
-| `AD8403.c`     | Implementierung der SPI-Kommunikation und Pin-Steuerung           |
+| `ad8403.h`     | Version, Adressdefinitionen, SPI- und Pin-Konfiguration, API      |
+| `ad8403.c`     | Implementierung der SPI-Kommunikation und Pin-Steuerung           |
 | `CHANGELOG.md` | Änderungshistorie                                                |
 
 ## Adressierung der Potentiometer
@@ -68,7 +68,7 @@ void AllPotiMidscale (void);                       // Alle Potis auf Wiper-Mitte
 ### Pins
 
 Die Pin-Makros (`AD8403_CS_ENABLE()`, `AD8403_RS_ENABLE()`, `AD8403_SHDN_ENABLE()` usw.)
-werden in `AD8403.h` automatisch erzeugt, sobald die folgenden Definitionen vorhanden sind.
+werden in `ad8403.h` automatisch erzeugt, sobald die folgenden Definitionen vorhanden sind.
 Am einfachsten werden die Pins in STM32CubeMX mit den User Labels `AD8403_CS`, `AD8403_RS`
 und `AD8403_SHDN` benannt – CubeMX erzeugt die Definitionen dann in `main.h`.
 
@@ -84,7 +84,7 @@ Fehlt eine dieser Definitionen, gibt der Compiler eine `#warning` aus
 ### SPI-Schnittstelle
 
 Standardmäßig wird `hspi1` verwendet. Soll ein anderes SPI-Handle genutzt werden, muss
-`AD8403_SPI_PORT` vor dem Einbinden von `AD8403.h` definiert werden, z. B. global über die
+`AD8403_SPI_PORT` vor dem Einbinden von `ad8403.h` definiert werden, z. B. global über die
 Compiler-Defines:
 
 ```c
@@ -97,7 +97,7 @@ Ist das Symbol `DEBUG` gesetzt, wird automatisch `DEBUG_AD8403` definiert.
 
 ### Version
 
-Die Version der Bibliothek ist in `AD8403.h` hinterlegt:
+Die Version der Bibliothek ist in `ad8403.h` hinterlegt:
 
 ```c
 #define AD8403_MAJOR    1
@@ -110,13 +110,13 @@ Die Version der Bibliothek ist in `AD8403.h` hinterlegt:
 
 ### 1. Dateien einbinden
 
-`AD8403.h` und `AD8403.c` in das STM32-Projekt kopieren und den Header einbinden. Da
-`AD8403.h` die HAL-Typen (`SPI_HandleTypeDef`, `uint8_t`) und die Pin-Definitionen aus
+`ad8403.h` und `ad8403.c` in das STM32-Projekt kopieren und den Header einbinden. Da
+`ad8403.h` die HAL-Typen (`SPI_HandleTypeDef`, `uint8_t`) und die Pin-Definitionen aus
 `main.h` benötigt, muss vorher `spi.h` (bindet `main.h` ein) eingebunden werden:
 
 ```c
 #include "spi.h"
-#include "AD8403.h"
+#include "ad8403.h"
 ```
 
 ### 2. Initialisierung
