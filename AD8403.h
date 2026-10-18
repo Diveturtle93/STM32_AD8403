@@ -3,9 +3,9 @@
 //----------------------------------------------------------------------
 // Sprache	:	C
 // Datum	:	27.08.2021
-// Version	:	1.0
 // Autor	:	Diveturtle93
 // Projekt	:	AD8403
+// Quelle	:
 //----------------------------------------------------------------------
 // Shutdown Pin				= Low, Wiper wird an Terminal B angeschlossen
 // Shutdown Pin				= High, Alle anderen Funktionen gegeben
@@ -36,31 +36,38 @@
 
 //----------------------------------------------------------------------
 
-// Einfuegen der eigenen Include Dateien
+// Einfuegen der eigenen Include-Dateien
 //----------------------------------------------------------------------
 
+//----------------------------------------------------------------------
+
+// Definiere Debug-Symbole
+//----------------------------------------------------------------------
+#ifdef DEBUG
+	#define DEBUG_AD8403
+#endif
 //----------------------------------------------------------------------
 
 // Version definieren
 //----------------------------------------------------------------------
-#define AD8403_MAJOR					0
-#define AD8403_MINOR					0
-#define AD8403_PATCH					0
-#define AD8403_DEV						0
+#define AD8403_MAJOR							0
+#define AD8403_MINOR							0
+#define AD8403_PATCH							0
+#define AD8403_DEV								0
 //----------------------------------------------------------------------
 
 // Addressen
 //----------------------------------------------------------------------
-#define AD8403_MUX0						0b00								// Poti 1
-#define AD8403_MUX1						0b01								// Poti 2
-#define AD8403_MUX2						0b10								// Poti 3
-#define AD8403_MUX3						0b11								// Poti 4
+#define AD8403_MUX0								0b00						// Poti 1
+#define AD8403_MUX1								0b01						// Poti 2
+#define AD8403_MUX2								0b10						// Poti 3
+#define AD8403_MUX3								0b11						// Poti 4
 //----------------------------------------------------------------------
 
 // Neudefinieren des SPI wenn notwendig
 //----------------------------------------------------------------------
 #ifndef AD8403_SPI_PORT
-	#define AD8403_SPI_PORT hspi1
+	#define AD8403_SPI_PORT						hspi1
 #endif
 
 extern SPI_HandleTypeDef AD8403_SPI_PORT;
@@ -71,8 +78,8 @@ extern SPI_HandleTypeDef AD8403_SPI_PORT;
 // Chip Select Pin
 //----------------------------------------------------------------------
 #ifdef AD8403_CS_GPIO_Port
-	#define AD8403_CS_ENABLE() (HAL_GPIO_WritePin(AD8403_CS_GPIO_Port, AD8403_CS_Pin, GPIO_PIN_RESET))			// Chip-Select Leitung enable
-	#define AD8403_CS_DISABLE() (HAL_GPIO_WritePin(AD8403_CS_GPIO_Port, AD8403_CS_Pin, GPIO_PIN_SET))			// Chip-Select Leitung disable
+	#define AD8403_CS_ENABLE()					(HAL_GPIO_WritePin(AD8403_CS_GPIO_Port, AD8403_CS_Pin, GPIO_PIN_RESET))			// Chip-Select Leitung enable
+	#define AD8403_CS_DISABLE()					(HAL_GPIO_WritePin(AD8403_CS_GPIO_Port, AD8403_CS_Pin, GPIO_PIN_SET))			// Chip-Select Leitung disable
 #else
 	#warning "Kein Chip Select Pin fuer AD8403 definiert"
 #endif
@@ -80,8 +87,8 @@ extern SPI_HandleTypeDef AD8403_SPI_PORT;
 // RS Pin
 //----------------------------------------------------------------------
 #ifdef AD8403_RS_GPIO_Port
-	#define AD8403_RS_ENABLE() (HAL_GPIO_WritePin(AD8403_RS_GPIO_Port, AD8403_RS_Pin, GPIO_PIN_SET))			// Reset-Select Leitung enable
-	#define AD8403_RS_DISABLE() (HAL_GPIO_WritePin(AD8403_RS_GPIO_Port, AD8403_RS_Pin, GPIO_PIN_RESET))			// Reset-Select Leitung disable
+	#define AD8403_RS_ENABLE()					(HAL_GPIO_WritePin(AD8403_RS_GPIO_Port, AD8403_RS_Pin, GPIO_PIN_SET))			// Reset-Select Leitung enable
+	#define AD8403_RS_DISABLE()					(HAL_GPIO_WritePin(AD8403_RS_GPIO_Port, AD8403_RS_Pin, GPIO_PIN_RESET))			// Reset-Select Leitung disable
 #else
 	#warning "Kein RS Pin fuer AD8403 definiert"
 #endif
@@ -89,8 +96,8 @@ extern SPI_HandleTypeDef AD8403_SPI_PORT;
 // Shutdown Pin
 //----------------------------------------------------------------------
 #ifdef AD8403_SHDN_GPIO_Port
-	#define AD8403_SHDN_ENABLE() (HAL_GPIO_WritePin(AD8403_SHDN_GPIO_Port, AD8403_SHDN_Pin, GPIO_PIN_SET))		// Shutdown Leitung enable
-	#define AD8403_SHDN_DISABLE() (HAL_GPIO_WritePin(AD8403_SHDN_GPIO_Port, AD8403_SHDN_Pin, GPIO_PIN_RESET))	// Shutdown Leitung disable
+	#define AD8403_SHDN_ENABLE()				(HAL_GPIO_WritePin(AD8403_SHDN_GPIO_Port, AD8403_SHDN_Pin, GPIO_PIN_SET))		// Shutdown Leitung enable
+	#define AD8403_SHDN_DISABLE()				(HAL_GPIO_WritePin(AD8403_SHDN_GPIO_Port, AD8403_SHDN_Pin, GPIO_PIN_RESET))	// Shutdown Leitung disable
 #else
 	#warning "Kein Shutdown Pin fuer AD8403 definiert"
 #endif
