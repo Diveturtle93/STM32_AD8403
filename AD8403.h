@@ -50,7 +50,7 @@
 
 // Version definieren
 //----------------------------------------------------------------------
-#define AD8403_MAJOR							0
+#define AD8403_MAJOR							1
 #define AD8403_MINOR							0
 #define AD8403_PATCH							0
 #define AD8403_DEV								0
