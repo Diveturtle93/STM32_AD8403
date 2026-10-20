@@ -1,11 +1,11 @@
 //----------------------------------------------------------------------
-// Titel	:	AD8403.c
+// Titel	:	ad8403.c
 //----------------------------------------------------------------------
 // Sprache	:	C
 // Datum	:	27.08.2021
-// Version	:	1.0
 // Autor	:	Diveturtle93
 // Projekt	:	AD8403
+// Quelle	:
 //----------------------------------------------------------------------
 
 // Einfuegen der standard Include-Dateien
@@ -18,10 +18,9 @@
 #include "spi.h"
 //----------------------------------------------------------------------
 
-// Einfuegen der eigenen Include Dateien
+// Einfuegen der eigenen Include-Dateien
 //----------------------------------------------------------------------
-#include "AD8403.h"
-#include "BatteriemanagementSystem.h"
+#include "ad8403.h"
 //----------------------------------------------------------------------
 
 // Initialisiere AD8403
@@ -57,7 +56,7 @@ void setPoti (uint8_t addresse, uint8_t Data)
 	AD8403_CS_ENABLE();
 
 	// Command fuer AD8403 senden
-	HAL_SPI_Transmit(&hspi1, tmp, 2, HAL_MAX_DELAY);
+	HAL_SPI_Transmit(&AD8403_SPI_PORT, tmp, 2, HAL_MAX_DELAY);
 
 	// Deaktiviere Chip Select
 	AD8403_CS_DISABLE();
