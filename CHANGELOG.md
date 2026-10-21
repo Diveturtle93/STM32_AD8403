@@ -24,21 +24,5 @@ Erste veröffentlichte Version.
 - README mit Beschreibung, API, Konfiguration, Verwendung und gemessenen Widerstandswerten.
 - CHANGELOG.
 
-### Geändert
-
-- Quelldateien in Kleinschreibung umbenannt (`AD8403.c` / `AD8403.h` → `ad8403.c` /
-  `ad8403.h`), passend zum Include und für Dateisysteme mit Groß-/Kleinschreibung.
-- Die gemessenen Widerstandstabellen wurden aus `ad8403.h` in die README verschoben.
-- Dateiköpfe vereinheitlicht: Versionszeile entfernt (Version steht in den Makros),
-  Feld `Quelle` ergänzt; Kommentare und Einrückung vereinheitlicht.
-
-### Entfernt
-
-- Abhängigkeit zum projektspezifischen Header `BatteriemanagementSystem.h`.
-
-### Behoben
-
-- SPI-Übertragung nutzt `AD8403_SPI_PORT` statt des fest eingetragenen `hspi1`.
-
 [Unveröffentlicht]: https://github.com/Diveturtle93/STM32_AD8403/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/Diveturtle93/STM32_AD8403/releases/tag/v1.0.0
